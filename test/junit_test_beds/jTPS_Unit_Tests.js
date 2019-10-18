@@ -112,7 +112,25 @@ class jTPS_Unit_Tests {
     }
     
     testOrMask() {
-        
+         // WE'LL JUST USE A SIMPLE NUM FOR TESTING
+         var tps = new jTPS();
+         var num = new Num();
+         this.print("Test Or Mask: ");
+         this.assertEquals(0, num.getNum());
+         
+         // ADD 5 TRANSACTION
+         tps.addTransaction(new AddToNum_Transaction(num, 12));
+         tps.addTransaction(new OrMask_Transaction(num, num.getNum(), 4));
+         this.assertEquals(12, num.getNum());
+         this.assertEquals(2, tps.getSize());
+         
+         tps.undoTransaction();
+         this.assertEquals(12, num.getNum());
+         this.assertEquals(2, tps.getSize());
+         this.assertEquals(1, tps.getRedoSize());
+         this.assertEquals(1, tps.getUndoSize());
+         document.getElementById('results').innerHTML += "<br/>";
+         document.getElementById('results').innerHTML += "<br/>";
     }
 
     /**
@@ -321,6 +339,7 @@ class jTPS_Unit_Tests {
         this.assertEquals(3, tps.getSize());
         this.assertEquals(0, tps.getRedoSize());
         this.assertEquals(3, tps.getUndoSize());
+        document.getElementById('results').innerHTML += "<br/>";
         document.getElementById('results').innerHTML += "<br/>";
         document.getElementById('results').innerHTML += "<br/>";
     }
