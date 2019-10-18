@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+    <head>
+        <title>@todo - The Todo List Manager Junit Tests</title>
+        <script src="./test/demo/AddToNum_Transaction.js"></script>
+        <script src="./test/demo/AndMask_Transaction.js"></script>
+        <script src="./test/demo/Num.js"></script>
+        <script src="./test/demo/OrMask_Transaction.js"></script>
+        <script src="./test/demo/jTPS_Tester.js"></script>
+        <script src="./src/jtps/jTPS.js"></script>
+        <script src="./src/jtps/jTPS_Transaction.js"></script>
+        <script src="./test/junit_test_beds/jTPS_Unit_Tests.js"></script>
+        <script>
+            window.onload = function(){
+                window.num = new Num();
+                window.jTPS = new jTPS();
+                window.unitTest = new jTPS_Unit_Tests();
+            }
+        </script>
+        <script>
+            function addTransaction(){
+                var x = Number(document.getElementById("amtToAdd").value);
+                var transaction = new AddToNum_Transaction(window.num, x);
+                window.jTPS.addTransaction(transaction);
+                document.getElementById("afterAmt").innerHTML = transaction.num.getNum();
+            }
+        </script>
+        <script>
+            function undoTransaction(){
+                var transaction = window.jTPS.transactions[window.jTPS.mostRecentTransaction];
+                window.jTPS.undoTransaction();
+                document.getElementById("afterAmt").innerHTML = transaction.num.getNum();
+            }
+        </script>
+        <script>
+            function redoTransaction(){
+                var transaction = window.jTPS.transactions[window.jTPS.mostRecentTransaction + 1];
+                window.jTPS.doTransaction();
+                document.getElementById("afterAmt").innerHTML = transaction.num.getNum();
+            }
+        </script>
+        <script>
+            function clearTransactions(){
+                var transaction = window.jTPS.transactions[window.jTPS.mostRecentTransaction];
+                window.jTPS.clearAllTransactions();
+                document.getElementById("afterAmt").innerHTML = transaction.num.getNum();
+            }
+        </script>
+        <script>
+            function resetNumTransactions(){
+                var transaction = window.jTPS.transactions[window.jTPS.mostRecentTransaction];
+                window.jTPS.clearAllTransactions();
+                window.num.setNum(0);
+                document.getElementById("afterAmt").innerHTML = transaction.num.getNum();
+            }
+        </script>
+        <script>
+            function testCases(){
+                window.unitTest.testAdd();
+                window.unitTest.testAndMask();
+                window.unitTest.testOrMask();
+                window.unitTest.testUndo();
+                window.unitTest.testRedo();
+                window.unitTest.testClear();
+            }
+        </script>
+    </head>
+    <body>
+        <h2>Enter a Selection</h2>
+        <input id="amtToAdd" type="number"/>
+        <div id="afterAmt" type="text"> </div>
+        <br>
+        <br>
+        <button onclick="addTransaction()">1) Add a Transaction</button>
+        <button onclick="undoTransaction()">2) Undo a Transaction</button>
+        <button onclick="redoTransaction()">3) Redo a Transaction</button>
+        <button onclick="clearTransactions()">4) Clear All Transactions</button>
+        <button onclick="resetNumTransactions()">5) Reset Num and Transactions</button>
+        <button onclick="testCases()">Test Cases</button>
+        <div>-</div>
+
+        <div id = "results">
+
+        </div>
+    </body>
+</html>

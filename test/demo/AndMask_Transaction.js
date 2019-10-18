@@ -7,14 +7,14 @@
  * @author McKillaGorilla
  */
 class AndMask_Transaction{
-    constructor(){
+    constructor(num, intNum, mask){
         // THIS IS THE OBJECT IT WILL MANIPULATE
-        this.num;
+        this.num = num;
     
-        this.intNum;
+        this.intNum = intNum;
     
         // AMOUNT TO MASK FOR NUM
-        this.mask;
+        this.mask = mask;
     }
 
     /**

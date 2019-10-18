@@ -13,12 +13,12 @@
  * @version 2.0
  */
 class AddToNum_Transaction{
-    constructor(){
+    constructor(num, amt){
         // THIS IS THE OBJECT IT WILL MANIPULATE
-        this.num;
+        this.num = num;
     
         // AMOUNT TO ADD/REMOVE FOR NUM
-        this.amountToAdd;
+        this.amountToAdd = amt;
 
     }
     /**
